@@ -200,11 +200,4 @@ you can defend from one you can't.
   multi-feed system would need either multiple queues (one per feed, fanned
   into the matching thread) or an MPSC structure.
 
-## Resume / Interview Notes
 
-The core engineering discipline here — a stream of discrete units of work
-flowing through deterministic stages with careful attention to allocation,
-cache locality, and measured (not assumed) latency — is the same mindset
-behind pipelined processor design: don't let a slow stage stall the whole
-pipeline, and measure the actual critical path instead of trusting your
-intuition about where the time goes.
