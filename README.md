@@ -183,21 +183,3 @@ than only showing the flattering number — being able to explain *why* a
 benchmark number looks the way it does is exactly what separates a project
 you can defend from one you can't.
 
-## Known Limitations (worth knowing before an interview asks)
-
-- Ladder levels emptied by cancellations in the *middle* of the book (not at
-  the best-price end) aren't compacted — only the best-price end is trimmed.
-  A long-running book with heavy mid-book cancellation activity would slowly
-  grow its deque capacity. A production system would periodically compact
-  or use a sparse structure for far-out-of-range levels.
-- `MemoryPool` capacity is fixed at startup; exceeding it throws rather than
-  growing. That's intentional (predictable behavior beats surprise
-  reallocation on the hot path) but means capacity has to be provisioned for
-  the expected peak resting-order count.
-- No persistence, no risk checks, no sequencing/replay, no networking layer —
-  this is a matching engine core, not a full exchange.
-- The SPSC queue is exactly that — single producer, single consumer. A real
-  multi-feed system would need either multiple queues (one per feed, fanned
-  into the matching thread) or an MPSC structure.
-
-
